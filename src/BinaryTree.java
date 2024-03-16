@@ -2,9 +2,9 @@
 // 26 March 2017
 // Hussein Suleman
 
-public class BinaryTree<dataType>
+public class BinaryTree<E extends Comparable<? super Generics>>
 {
-   BinaryTreeNode<dataType> root;
+   BSTNode<Generics> root;
    
    public BinaryTree ()
    {
@@ -15,7 +15,7 @@ public class BinaryTree<dataType>
    {
       return getHeight (root);
    }   
-   public int getHeight ( BinaryTreeNode<dataType> node )
+   public int getHeight ( BSTNode<Generics> node )
    {
       if (node == null)
          return -1;
@@ -27,7 +27,7 @@ public class BinaryTree<dataType>
    {
       return getSize (root);
    }   
-   public int getSize ( BinaryTreeNode<dataType> node )
+   public int getSize ( BSTNode<Generics> node )
    {
       if (node == null)
          return 0;
@@ -35,16 +35,16 @@ public class BinaryTree<dataType>
          return 1 + getSize (node.getLeft ()) + getSize (node.getRight ());
    }
    
-   public void visit ( BinaryTreeNode<dataType> node )
+   public void visit ( BSTNode<Generics> node )
    {
-      System.out.println (node.data);
+      System.out.println (node.getData());
    }
    
    public void preOrder ()
    {
       preOrder (root);
    }
-   public void preOrder ( BinaryTreeNode<dataType> node )
+   public void preOrder ( BSTNode<Generics> node )
    {
       if (node != null)
       {
@@ -58,7 +58,7 @@ public class BinaryTree<dataType>
    {
       postOrder (root);
    }
-   public void postOrder ( BinaryTreeNode<dataType> node )
+   public void postOrder ( BSTNode<Generics> node )
    {
       if (node != null)
       {
@@ -72,7 +72,7 @@ public class BinaryTree<dataType>
    {
       inOrder (root);
    }
-   public void inOrder ( BinaryTreeNode<dataType> node )
+   public void inOrder ( BSTNode<Generics> node )
    {
       if (node != null)
       {

@@ -5,7 +5,7 @@
  * @since 25/02/2024 
  * @version 2
 */
-public class Generics 
+public class Generics implements Comparable<Generics>
 {
 	/**
 	 * Holds the term/word
@@ -98,6 +98,13 @@ public class Generics
 	 * @return the data in the object in the format: Term\tSentence\tConfidence_score
 	 */
 		public String toString() {
-			return (term + "\t" +sentence + " \t" + confidence);
+			return (term);
 		}
+
+	@Override
+	public int compareTo(Generics o) 
+	{
+		 return term.compareToIgnoreCase(o.getTerm());
+	}
+
 }
