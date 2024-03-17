@@ -34,11 +34,7 @@ public class AVLTreeTest
       bt.insert (d); 
       
 /*
-                   5
-            1             7
-                2      6     9
-                  4        8
-                 3
+    
 */                 
       System.out.println ("Inorder : ");
       bt.treeOrder ();

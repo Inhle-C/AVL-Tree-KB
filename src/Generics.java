@@ -32,6 +32,17 @@ public class Generics implements Comparable<Generics>
 	}
 	
 	/**
+	 * Constructor for when only term is known
+	 * @param t term
+	 */
+	public Generics(String t) 
+	{
+		term= t;
+		sentence= null;
+		confidence=0;
+	}
+	
+	/**
 	 * Constructor that takes given term, sentence and confidence score and constructs a Object
 	 * @param t term
 	 * @param s sentence

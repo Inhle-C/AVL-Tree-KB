@@ -5,8 +5,11 @@
 
 public class AVLTree<T extends Comparable<? super Generics>> extends BinaryTree<Generics>
 {
+	
+	
    public int height ( BSTNode<Generics> node )
    {
+	  AVLTreeKB.count();
       if (node != null)
          return node.height;
       return -1;
@@ -45,14 +48,18 @@ public class AVLTree<T extends Comparable<? super Generics>> extends BinaryTree<
    public BSTNode<Generics> balance ( BSTNode<Generics> p )
    {
       fixHeight (p);
+      AVLTreeKB.count();
       if (balanceFactor (p) == 2)
       {
+    	 AVLTreeKB.count();
          if (balanceFactor (p.getRight()) < 0)
             p.setRightChild(rotateRight (p.getRight()));
          return rotateLeft (p);
       }
+      AVLTreeKB.count();
       if (balanceFactor (p) == -2)
       {
+    	 AVLTreeKB.count();
          if (balanceFactor (p.getLeft()) > 0)
             p.leftChild = rotateLeft (p.getLeft());
          return rotateRight (p);
@@ -66,8 +73,10 @@ public class AVLTree<T extends Comparable<? super Generics>> extends BinaryTree<
    }
    public BSTNode<Generics> insert ( Generics d, BSTNode<Generics> node )
    {
+	  AVLTreeKB.count();
       if (node == null)
          return new BSTNode<Generics> (d, null, null);
+      AVLTreeKB.count();
       if (d.compareTo (node.data) <= 0)
          node.leftChild = insert (d, node.leftChild);
       else
@@ -81,7 +90,9 @@ public class AVLTree<T extends Comparable<? super Generics>> extends BinaryTree<
    }   
    public BSTNode<Generics> delete ( Generics d, BSTNode<Generics> node )
    {
+	  AVLTreeKB.count();
       if (node == null) return null;
+      AVLTreeKB.count();
       if (d.compareTo (node.getData()) < 0)
          node.leftChild = delete (d, node.leftChild);
       else if (d.compareTo (node.getData()) > 0)
@@ -90,6 +101,7 @@ public class AVLTree<T extends Comparable<? super Generics>> extends BinaryTree<
       {
          BSTNode<Generics> q = node.getLeft();
          BSTNode<Generics> r = node.getRight();
+         AVLTreeKB.count();
          if (r == null)
             return q;
          BSTNode<Generics> min = findMin (r);
@@ -102,6 +114,7 @@ public class AVLTree<T extends Comparable<? super Generics>> extends BinaryTree<
    
    public BSTNode<Generics> findMin ( BSTNode<Generics> node )
    {
+	  AVLTreeKB.count();
       if (node.getLeft() != null)
          return findMin (node.getLeft());
       else
@@ -110,6 +123,7 @@ public class AVLTree<T extends Comparable<? super Generics>> extends BinaryTree<
 
    public BSTNode<Generics> removeMin ( BSTNode<Generics> node )
    {
+	  AVLTreeKB.count(); 
       if (node.getLeft() == null)
          return node.getRight();
       node.leftChild = removeMin (node.leftChild);
@@ -118,6 +132,7 @@ public class AVLTree<T extends Comparable<? super Generics>> extends BinaryTree<
 
    public BSTNode<Generics> find ( Generics d )
    {
+	  AVLTreeKB.count(); 
       if (root == null)
          return null;
       else
@@ -125,6 +140,7 @@ public class AVLTree<T extends Comparable<? super Generics>> extends BinaryTree<
    }
    public BSTNode<Generics> find ( Generics d, BSTNode<Generics> node )
    {
+	  AVLTreeKB.count();
       if (d.compareTo (node.getData()) == 0) 
          return node;
       else if (d.compareTo (node.getData()) < 0)

@@ -111,7 +111,7 @@ public class BSTNode <E extends Comparable<? super Generics>>
 	   @Override
 		public String toString() {
 			// TODO Auto-generated method stub
-			return data.toString();
+			return (data.toString() +": " + getData().getSentence()+ "("+ data.getConfidence() + ")");
 		}
 
 }
