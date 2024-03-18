@@ -11,15 +11,17 @@ $(BINDIR)/%.class: $(SRCDIR)/%.java
 .java.class:
 	$(JC) $(JFLAGS) $*.java
 
-SRC_FILES = BinarySearchTreeKB.java BSTNode.java Generic.java GenericsKbArrayApp.java GenericsKbBSTApp.java
+SRC_FILES = BinaryTree.java BSTNode.java Generics.java GenericsKbAVLApp.java AVLTree.java
 JAVADOC = doc
 
 CLASSES= \
-BinarySearchTreeKB.java \
+BinaryTree.java \
 BSTNode.java \
-Generic.java \
-GenericsKbArrayApp.java \
-GenericsKbBSTApp.java
+Generics.java \
+AVLTree.java \
+GenericsKbAVLApp.java
+
+OUTPUT_FILE = output.txt
 
 CLASS_FILES= $(CLASSES:%.java=$(BINDIR)/%.class)
 
@@ -34,8 +36,8 @@ javadoc: $(SRC_FILES)
 compile: $(CLASS_FILES)
 
 clean:
-	$(RM) $(BINDIR)/*.class
+	$(RM) $(BINDIR)/*.class $(OUTPUT_FILE)
 
 run:
-	java -cp $(BINDIR) GenericsKbAVLApp
+	java -cp $(BINDIR) GenericsKbAVLApp > $(OUTPUT_FILE)
 
