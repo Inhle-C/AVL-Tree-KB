@@ -11,13 +11,13 @@ $(BINDIR)/%.class: $(SRCDIR)/%.java
 .java.class:
 	$(JC) $(JFLAGS) $*.java
 
-SRC_FILES = BinaryTree.java BSTNode.java Generics.java GenericsKbAVLApp.java AVLTree.java
+SRC_FILES = Generics.java BSTNode.java BinaryTree.java AVLTree.java GenericsKbAVLApp.java 
 JAVADOC = doc
 
 CLASSES= \
-BinaryTree.java \
-BSTNode.java \
 Generics.java \
+BSTNode.java \
+BinaryTree.java \
 AVLTree.java \
 GenericsKbAVLApp.java
 
@@ -39,5 +39,5 @@ clean:
 	$(RM) $(BINDIR)/*.class $(OUTPUT_FILE)
 
 run:
-	java -cp $(BINDIR) GenericsKbAVLApp > $(OUTPUT_FILE)
+	java -cp $(BINDIR) GenericsKbAVLApp >> $(OUTPUT_FILE)
 

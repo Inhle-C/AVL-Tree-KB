@@ -7,14 +7,7 @@ public class GenericsKbAVLApp
 {
 	
 	static int size=0;
-	/**
-	 * Operation Counter variable which will be used inbetween all clasess for the inserting
-	 */
-	public static int opCountInsert=0;
-	/**
-	 * Operation Counter variable which will be used inbetween all clasess for searching
-	 */
-	public static int opCountSearch=0;
+	
 	/**
 	 * Creates a AVL Search Tree that we'll be using to store all the items
 	 */
@@ -31,8 +24,6 @@ public class GenericsKbAVLApp
 	public static void readFileDB(String fName) 
 	{
 	 
-	if (fileIn== null)
-	{
 	  try 
 	  {
 		fileIn= new Scanner(new FileInputStream(fName));
@@ -54,41 +45,34 @@ public class GenericsKbAVLApp
 		System.out.println("File not found");
 	  }	
 	}
-	else 
+	
+	public static void readFileDB(String fName, int numS) 
 	{
-		try 
-		  {
-			fileIn= new Scanner(new FileInputStream(fName));
-			while (fileIn.hasNext()) 
-			{
-				String line= fileIn.nextLine();
-				String [] genericDetails = new String[3];
-				genericDetails = line.split("\\t");
-				Generics temp = new Generics(genericDetails[0],genericDetails[1], genericDetails[2]);
-				
-				BSTNode<Generics> exist= mainTree.find(temp);
-				if (exist!= null)//if the term exists in the knowledge base
-				{
-				  if (temp.getConfidence()>= exist.getData().getConfidence())
-				  {
-					  exist.getData().setTerm(temp.getTerm());
-					  exist.getData().setConfidence(temp.getConfidence());
-					  exist.getData().setSentence(temp.getSentence());
-				  }
-				}
-				else //if it doesnt
-				mainTree.insert(temp);
-			} 
-			
-			System.out.println("Knowledge base loaded succesfully.");
-			fileIn.close();
-			
-		  } catch (FileNotFoundException f) 
-		  {
-			System.out.println("File not found");
-		  }	
+	 
+	  try 
+	  {
+		fileIn= new Scanner(new FileInputStream(fName));
+		while (fileIn.hasNext()) 
+		{
+			String line= fileIn.nextLine();
+			String [] genericDetails = new String[3];
+			genericDetails = line.split("\\t");
+			Generics temp = new Generics(genericDetails[0],genericDetails[1], genericDetails[2]);
+			mainTree.insert(temp);
+			size++;
+			if (size== numS)
+				break;
+		} 
+		
+		System.out.println("\nKnowledge base loaded succesfully.");
+		fileIn.close();
+		
+	  } catch (FileNotFoundException f) 
+	  {
+		System.out.println("File not found");
+	  }	
 	}
-	}
+	
 	public static void readFileQuery(String F, int i)
 	{
 		ArrayList<Generics> queries = new ArrayList<>();
@@ -103,11 +87,13 @@ public class GenericsKbAVLApp
 				
 			}
 			
+			int currentS=0;
+			int prevSsum=0;
 			for (int n=0; n<i; n++) 
 			{
 					int random=(int)( Math.random()* (queries.size()));
 					BSTNode<Generics> exist = mainTree.find(queries.get(random));
-					if (exist!= null)
+					/*if (exist!= null)
 					{
 						System.out.println(exist);
 					}
@@ -115,7 +101,10 @@ public class GenericsKbAVLApp
 					{
 						System.out.println(queries.get(random).getTerm()+ ": This Term does not exist in the KB");
 					}
-					System.out.println("N value: "+ opCountSearch);
+					
+					currentS= AVLTree.opCountSearch - prevSsum;
+					// System.out.println("Cost value of this search: "+ currentS);
+					prevSsum+= currentS;*/
 			
 			} 
 			
@@ -130,23 +119,22 @@ public class GenericsKbAVLApp
 	
 	public static void main(String[] args) 
 	{
-		readFileDB("GenericsKB.txt");
+		System.out.println("Experiment 2 (Both):");
+		Scanner keyboard= new Scanner(System.in);
+		int Numsearches= keyboard.nextInt();
+		
+		readFileDB("GenericsKB.txt", Numsearches);
 		System.out.println("size of the file: " + size);
-		readFileQuery("GenericsKB-queries.txt", 10);
-		System.out.println(opCountInsert);
-		System.out.println(opCountSearch);
+		
+		
+		readFileQuery("GenericsKB-queries.txt", Numsearches);
+		System.out.println("Total Cost of the insert operations: " + AVLTree.opCountInsert);
+		System.out.println("Total Cost of the search operations: "+ AVLTree.opCountSearch);
 		
 		
 		
 	}
 	
-	public static void countI()
-	{
-		opCountInsert++;
-	}
-	public static void countS()
-	{
-		opCountSearch++;
-	}
+
 
 }

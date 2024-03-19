@@ -6,10 +6,19 @@
 public class AVLTree<T extends Comparable<? super Generics>> extends BinaryTree<Generics>
 {
 	
+	/**
+	 * Operation Counter variable which will be used inbetween all clasess for the inserting
+	 */
+	public static int opCountInsert=0;
+	/**
+	 * Operation Counter variable which will be used inbetween all clasess for searching
+	 */
+	public static int opCountSearch=0;
+	
 	
    public int height ( BSTNode<Generics> node )
    {
-	  GenericsKbAVLApp.countI();  
+	  countI();  
       if (node != null)
          return node.height;
       return -1;
@@ -48,18 +57,18 @@ public class AVLTree<T extends Comparable<? super Generics>> extends BinaryTree<
    public BSTNode<Generics> balance ( BSTNode<Generics> p )
    {
       fixHeight (p);
-      GenericsKbAVLApp.countI();
+      countI();
       if (balanceFactor (p) == 2)
       {
-    	 GenericsKbAVLApp.countI();
+    	 countI();
          if (balanceFactor (p.getRight()) < 0)
             p.setRightChild(rotateRight (p.getRight()));
          return rotateLeft (p);
       }
-      GenericsKbAVLApp.countI();
+      countI();
       if (balanceFactor (p) == -2)
       {
-    	 GenericsKbAVLApp.countI();
+    	 countI();
          if (balanceFactor (p.getLeft()) > 0)
             p.leftChild = rotateLeft (p.getLeft());
          return rotateRight (p);
@@ -73,10 +82,10 @@ public class AVLTree<T extends Comparable<? super Generics>> extends BinaryTree<
    }
    public BSTNode<Generics> insert ( Generics d, BSTNode<Generics> node )
    {
-	  GenericsKbAVLApp.countI();
+	  countI();
       if (node == null)
          return new BSTNode<Generics> (d, null, null);
-      GenericsKbAVLApp.countI();
+      countI();
       if (d.compareTo (node.data) <= 0)
          node.leftChild = insert (d, node.leftChild);
       else
@@ -127,7 +136,7 @@ public class AVLTree<T extends Comparable<? super Generics>> extends BinaryTree<
 
    public BSTNode<Generics> find ( Generics d )
    {
-	  GenericsKbAVLApp.countS(); 
+	  countS(); 
       if (root == null)
          return null;
       else
@@ -135,7 +144,7 @@ public class AVLTree<T extends Comparable<? super Generics>> extends BinaryTree<
    }
    public BSTNode<Generics> find ( Generics d, BSTNode<Generics> node )
    {
-	  GenericsKbAVLApp.countS();
+	  countS();
       if (d.compareTo (node.getData()) == 0) 
          return node;
       else if (d.compareTo (node.getData()) < 0)
@@ -159,5 +168,14 @@ public class AVLTree<T extends Comparable<? super Generics>> extends BinaryTree<
          treeOrder (node.getRight(), level+1);
       }
    }
+   
+	public static void countI()
+	{
+		opCountInsert++;
+	}
+	public static void countS()
+	{
+		opCountSearch++;
+	}
 }
 
