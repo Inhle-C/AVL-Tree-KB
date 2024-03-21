@@ -29,9 +29,11 @@ default: classes run
 
 classes: $(CLASS_FILES)
 
-javadoc: $(SRC_FILES)
+javadoc: $(SRCDIR)
+	echo "Generating Javadoc..."
+	echo "Source directory: $(SRCDIR)"
 	mkdir -p $(JAVADOC)
-	javadoc -d $(JAVADOC) $(SRC_FILES)
+	javadoc -d $(JAVADOC) $(SRCDIR)
 
 compile: $(CLASS_FILES)
 

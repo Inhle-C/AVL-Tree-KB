@@ -108,11 +108,17 @@ public class Generics implements Comparable<Generics>
 	 * returns the term, sentence and confidence score as a string output
 	 * @return the data in the object in the format: Term\tSentence\tConfidence_score
 	 */
-		public String toString() {
+	public String toString() {
 			return (term);
 		}
 
 	@Override
+	/**
+	 * Compares this object with the specified object for order based on the terms.
+	 * 
+	 * @param o the object to be compared
+	 * @return a negative integer, zero, or a positive integer as this object is less than, equal to, or greater than the specified object
+	 */
 	public int compareTo(Generics o) 
 	{
 		 return term.compareToIgnoreCase(o.getTerm());
